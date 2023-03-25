@@ -2,7 +2,7 @@
  * @name NitroStreams
  * @author Domson
  * @description Allows you to stream in Discord's Nitro quality.
- * @version 1.1.0
+ * @version 1.2.0
  * @website https://github.com/Dominikodz/NitroStreams
  * @source https://github.com/Dominikodz/NitroStreams/blob/main/NitroStreams.plugin.js
  * @updateUrl https://raw.githubusercontent.com/Dominikodz/NitroStreams/main/NitroStreams.plugin.js
@@ -47,7 +47,7 @@ const config = {
                 github_username: "Dominikodz"
 		    }
         ],
-        version: "1.1.0",
+        version: "1.2.0",
 		description: "Allows you to stream in Discord's Nitro quality.",
 		github: "https://github.com/Dominikodz/NitroStreams",
 		github_raw: "https://raw.githubusercontent.com/Dominikodz/NitroStreams/main/NitroStreams.plugin.js"
