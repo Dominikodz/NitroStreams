@@ -2,7 +2,7 @@
  * @name NitroStreams
  * @author Domson
  * @description Allows you to stream in Discord's Nitro quality.
- * @version 1.2.0
+ * @version 1.2.2
  * @website https://github.com/Dominikodz/NitroStreams
  * @source https://github.com/Dominikodz/NitroStreams/blob/main/NitroStreams.plugin.js
  * @updateUrl https://raw.githubusercontent.com/Dominikodz/NitroStreams/main/NitroStreams.plugin.js
@@ -47,7 +47,7 @@ const config = {
                 github_username: "Dominikodz"
 		    }
         ],
-        version: "1.2.0",
+        version: "1.2.2",
 		description: "Allows you to stream in Discord's Nitro quality.",
 		github: "https://github.com/Dominikodz/NitroStreams",
 		github_raw: "https://raw.githubusercontent.com/Dominikodz/NitroStreams/main/NitroStreams.plugin.js"
@@ -55,7 +55,7 @@ const config = {
 	changelog: [
         {
             title: "NitroStreams Updated!",
-            type: "fixed",
+            type: "improved",
             items: [
                 "Updated plugin. If discord decides to patch this method, i will autoUpdate the plugin :)."
             ]
@@ -90,11 +90,8 @@ if (!window.hasOwnProperty("ZeresPluginLibrary")) {
         }
     });
 };
-module.exports = !global.ZeresPluginLibrary ? Dummy : (([Plugin, Api]) => {
-    const plugin = (Plugin, Api) => {
-    const {ContextMenu, DOM, Webpack, Patcher} = window.BdApi;
-
-    /* globals BdApi:false */
+module.exports = !global.ZeresPluginLibrary ? Dummy : (([Plugin]) => {
+    const plugin = (Plugin) => {
     return class NitroStreams extends Plugin {
         onStart() {
             console.log(
@@ -113,6 +110,6 @@ module.exports = !global.ZeresPluginLibrary ? Dummy : (([Plugin, Api]) => {
         onStop() {}
     };
 };
-    return plugin(Plugin, Api);
+    return plugin(Plugin);
 })(global.ZeresPluginLibrary.buildPlugin(config));
 /*@end@*/
