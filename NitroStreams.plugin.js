@@ -2,7 +2,7 @@
  * @name NitroStreams
  * @author Domson
  * @description Allows you to stream in Discord's Nitro quality.
- * @version 1.2.5
+ * @version 1.1.0
  * @website https://github.com/Dominikodz/NitroStreams
  * @source https://github.com/Dominikodz/NitroStreams/blob/main/NitroStreams.plugin.js
  * @updateUrl https://raw.githubusercontent.com/Dominikodz/NitroStreams/main/NitroStreams.plugin.js
@@ -30,28 +30,89 @@
     WScript.Quit();
 
 @else@*/
+
 /*
  * Copyright © 2019-2023, Domson
  * All rights reserved.
  * Code may not be redistributed, modified or otherwise taken without explicit permission.
  */
 
-module.exports = class ExamplePlugin {
-    start() {
-        console.log(
-            window.webpackChunkdiscord_app.push([
-                [Math.random()], {}, (req) => {
-                    for (const m of Object.keys(req.c).map((x) => req.c[x].exports).filter((x) => x)) {
-                        if (m.default && m.default.getCurrentUser !== undefined) {
-                            return m.default.getCurrentUser().premiumType = 2;
+const config = {
+	info: {
+		name: "NitroStreams",
+		authors: [
+            {
+                name: "Domson 🤔",
+                discord_id: "477079532999016448",
+                github_username: "Dominikodz"
+		    }
+        ],
+        version: "1.1.0",
+		description: "Allows you to stream in Discord's Nitro quality.",
+		github: "https://github.com/Dominikodz/NitroStreams",
+		github_raw: "https://raw.githubusercontent.com/Dominikodz/NitroStreams/main/NitroStreams.plugin.js"
+	},
+	changelog: [
+        {
+            title: "NitroStreams Updated!",
+            type: "fixed",
+            items: [
+                "Updated plugin. If discord decides to patch this method, i will autoUpdate the plugin :)."
+            ]
+	    }
+    ],
+    main: "NitroStreams.plugin.js",
+};
+
+class Dummy {
+    constructor() {this._config = config;}
+    start() {}
+    stop() {}
+}
+
+if (!window.hasOwnProperty("ZeresPluginLibrary")) {
+    BdApi.showConfirmationModal("Library Missing", `The library plugin needed for ${config.info.name} is missing. Please click Download Now to install it.`, {
+        confirmText: "Download Now",
+        cancelText: "Cancel",
+        onConfirm: () => {
+            require("request").get("https://betterdiscord.app/gh-redirect?id=9", async (err, resp, body) => {
+                if (err) return require("electron").shell.openExternal("https://betterdiscord.app/Download?id=9");
+                if (resp.statusCode === 302) {
+                    require("request").get(resp.headers.location, async (error, response, content) => {
+                        if (error) return require("electron").shell.openExternal("https://betterdiscord.app/Download?id=9");
+                        await new Promise(r => require("fs").writeFile(require("path").join(BdApi.Plugins.folder, "0PluginLibrary.plugin.js"), content, r));
+                    });
+                }
+                else {
+                    await new Promise(r => require("fs").writeFile(require("path").join(BdApi.Plugins.folder, "0PluginLibrary.plugin.js"), body, r));
+                }
+            });
+        }
+    });
+};
+module.exports = !global.ZeresPluginLibrary ? Dummy : (([Plugin, Api]) => {
+    const plugin = (Plugin, Api) => {
+    const {ContextMenu, DOM, Webpack, Patcher} = window.BdApi;
+
+    /* globals BdApi:false */
+    return class NitroStreams extends Plugin {
+        onStart() {
+            console.log(
+                window.webpackChunkdiscord_app.push([
+                    [Math.random()], {}, (req) => {
+                        for (const m of Object.keys(req.c).map((x) => req.c[x].exports).filter((x) => x)) {
+                            if (m.default && m.default.getCurrentUser !== undefined) {
+                                return m.default.getCurrentUser().premiumType = 2;
+                            }
                         }
                     }
-                }
-            ])
-        );
-    }
-    stop() {
-      // Cleanup when disabled
-    }
+                ])
+            );
+        }
+       
+        onStop() {}
+    };
 };
+    return plugin(Plugin, Api);
+})(global.ZeresPluginLibrary.buildPlugin(config));
 /*@end@*/
