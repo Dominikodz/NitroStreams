@@ -2,7 +2,10 @@
  * @name NitroStreams
  * @author Domson
  * @description Allows you to stream in Discord's Nitro quality.
- * @version 1.1.1
+ * @version 1.2.5
+ * @website https://github.com/Dominikodz/NitroStreams
+ * @source https://github.com/Dominikodz/NitroStreams/blob/main/NitroStreams.plugin.js
+ * @updateUrl https://raw.githubusercontent.com/Dominikodz/NitroStreams/main/NitroStreams.plugin.js
  */
 /*@cc_on
 @if (@_jscript)
@@ -28,15 +31,13 @@
 
 @else@*/
 /*
- * Copyright © 2019-2022, Domson
+ * Copyright © 2019-2023, Domson
  * All rights reserved.
  * Code may not be redistributed, modified or otherwise taken without explicit permission.
  */
 
 module.exports = class ExamplePlugin {
     start() {
-        // how do i do it? // window.webpackChunkdiscord_app.push([[Math.random()], {}, (req) => {for (const m of Object.keys(req.c).map((x) => req.c[x].exports).filter((x) => x)) {if (m.default && m.default.getCurrentUser !== undefined) {return m.default.getCurrentUser().premiumType = 2;}}}]);
-    
         console.log(
             window.webpackChunkdiscord_app.push([
                 [Math.random()], {}, (req) => {
